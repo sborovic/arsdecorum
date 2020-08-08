@@ -21,7 +21,7 @@
     >
       <template #navigation>
         <SfHeaderNavigationItem v-for="item in navigation" :key="item">
-          <SfLink href="#">{{ item }}</SfLink>
+          <SfLink :link="{ name: item }">{{ item }}</SfLink>
         </SfHeaderNavigationItem>
       </template>
     </SfHeader>
@@ -29,6 +29,7 @@
 </template>
 <script>
 import { SfHeader, SfLink } from '@storefront-ui/vue';
+import SiteLogo from '@/assets/logo.svg';
 
 export default {
   components: {
@@ -38,13 +39,10 @@ export default {
   data() {
     return {
       isMobile: false,
-      navigation: ['women', 'man', 'kids'],
+      navigation: ['Home', 'Products', 'About'],
       searchValue: '',
-      title: 'Storefront UI',
-      logo: {
-        mobile: { url: '/assets/logo.svg' },
-        desktop: { url: '/assets/logo.svg' },
-      },
+      title: 'ArsDecorum',
+      logo: SiteLogo,
       activeIcon: 'account',
       isSticky: true,
       searchPlaceholder: 'Search for items',
@@ -53,6 +51,10 @@ export default {
       accountIcon: 'profile',
       cartItemsQty: '0',
       wishlistItemsQty: '0',
+      customClass: [
+        'sf-header--has-mobile-navigation',
+        'sf-header--has-mobile-search',
+      ],
     };
   },
 };

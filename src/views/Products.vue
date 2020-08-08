@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <StoreHeader/>
-          <p>About</p>
+    <p>Products</p>
     <StoreHero/>
     <StoreFooter/>
   </div>
@@ -14,7 +14,7 @@ import StoreHero from '@/components/StoreHero.vue';
 import StoreFooter from '@/components/StoreFooter.vue';
 
 export default {
-  name: 'About',
+  name: 'Products',
   components: {
     StoreHeader,
     StoreHero,

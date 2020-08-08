@@ -25,4 +25,12 @@
     }
   }
 }
+
+.sf-header {
+  --header-navigation-item-border-color: red;
+}
+
+.sf-header--is-hidden {
+  --header-wrapper-transform: none !important;
+}
 </style>
