@@ -26,6 +26,27 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
+    children: [
+      {
+        path: '', // Default component
+        component: () => import(/* webpackChunkName: "admin_overview" */ '../components/AdminOverview.vue'),
+      },
+      {
+        path: 'overview',
+        name: 'AdminOverview',
+        component: () => import(/* webpackChunkName: "admin_overview" */ '../components/AdminOverview.vue'),
+      },
+      {
+        path: 'products',
+        name: 'AdminProducts',
+        component: () => import(/* webpackChunkName: "admin_products" */ '../components/AdminProducts.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'AdminOrders',
+        component: () => import(/* webpackChunkName: "admin_orders" */ '../components/AdminOrders.vue'),
+      },
+    ],
     component: () => import(/* webpackChunkName: "admin" */ '../views/AdminContainer.vue'),
   },
 ];
