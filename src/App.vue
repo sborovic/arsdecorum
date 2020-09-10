@@ -5,12 +5,12 @@
 </template>
 
 <style lang="scss">
-
-.sf-header {
-  --header-navigation-item-border-color: red;
+body {
+  margin-top: 0;
 }
-
-.sf-header--is-hidden {
-  --header-wrapper-transform: none !important;
+#app {
+  @import "~@storefront-ui/vue/styles";
+  @include generate-color-variants(--_c-green-primary, #c72d37);
+  @include assign-color-variants(--c-primary, --_c-green-primary);
 }
 </style>
