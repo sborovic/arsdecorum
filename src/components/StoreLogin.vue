@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="false" :title="modalTitle">
+  <SfModal id="login" :visible="visible" :title="modalTitle" @close="$emit('close')">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
@@ -81,6 +81,7 @@
     </transition>
   </SfModal>
 </template>
+
 <script>
 import {
   SfModal,
@@ -98,6 +99,9 @@ export default {
     SfButton,
     SfCheckbox,
     SfHeading,
+  },
+  props: {
+    visible: Boolean,
   },
   data() {
     return {
@@ -127,6 +131,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 @import "~@storefront-ui/vue/styles";
 .modal-content,

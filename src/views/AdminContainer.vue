@@ -133,5 +133,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+    @import '~bootstrap/scss/bootstrap';
     @import '../assets/admin.scss';
 </style>

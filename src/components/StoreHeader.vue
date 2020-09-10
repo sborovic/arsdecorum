@@ -16,7 +16,7 @@
       :wishlist-items-qty="wishlistItemsQty"
       @click:cart="alert('@click:cart')"
       @click:wishlist="alert('@click:wishlist')"
-      @click:account="alert('@click:account')"
+      @click:account="isModalVisible = true"
       @change:search="searchValue = $event"
     >
       <template #navigation>
@@ -25,20 +25,24 @@
         </SfHeaderNavigationItem>
       </template>
     </SfHeader>
+    <StoreLogin :visible="isModalVisible" @close="isModalVisible = false"/>
   </div>
 </template>
 <script>
 import { SfHeader, SfLink } from '@storefront-ui/vue';
 import SiteLogo from '@/assets/logo.svg';
+import StoreLogin from '@/components/StoreLogin.vue';
 
 export default {
   components: {
     SfHeader,
     SfLink,
+    StoreLogin,
   },
   data() {
     return {
       isMobile: false,
+      isModalVisible: false,
       navigation: ['Home', 'Products', 'About'],
       searchValue: '',
       title: 'ArsDecorum',
@@ -59,3 +63,8 @@ export default {
   },
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+
+</style>

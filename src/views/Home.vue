@@ -3,7 +3,6 @@
     <StoreHeader/>
     <StoreHero/>
     <StoreFooter/>
-    <StoreLogin/>
   </div>
 </template>
 
@@ -12,7 +11,6 @@
 import StoreHeader from '@/components/StoreHeader.vue';
 import StoreHero from '@/components/StoreHero.vue';
 import StoreFooter from '@/components/StoreFooter.vue';
-import StoreLogin from '@/components/StoreLogin.vue';
 
 export default {
   name: 'Home',
@@ -20,7 +18,11 @@ export default {
     StoreHeader,
     StoreHero,
     StoreFooter,
-    StoreLogin,
   },
 };
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+
+</style>
