@@ -4,7 +4,7 @@
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
           <SfInput
-            v-model="email"
+            v-model.trim="email"
             name="email"
             label="Your email"
             class="form__element"
@@ -24,7 +24,7 @@
             label="Remember me"
             class="form__element form__checkbox"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit">
+          <SfButton type="submit" class="sf-button--full-width form__submit" @click='login'>
             Log In
           </SfButton>
         </form>
@@ -45,19 +45,19 @@
       <div v-else key="sign-up" class="modal-content">
         <form class="form" @submit.prevent="() => false">
           <SfInput
-            v-model="firstName"
+            v-model.trim="firstName"
             name="first-name"
             label="Name"
             class="form__element"
           />
           <SfInput
-            v-model="lastName"
+            v-model.trim="lastName"
             name="last-name"
             label="Last Name"
             class="form__element"
           />
           <SfInput
-            v-model="email"
+            v-model.trim="email"
             name="email"
             label="Your email"
             class="form__element"
@@ -69,8 +69,10 @@
             label="Password"
             type="password"
             class="form__element"
+            :valid="passwordValid"
+            :error-message="passwordErrorMessage"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit">
+          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signup'>
             Create an account
           </SfButton>
         </form>
@@ -90,6 +92,7 @@ import {
   SfCheckbox,
   SfHeading,
 } from '@storefront-ui/vue';
+import { auth, db } from '../firebase';
 
 export default {
   name: 'StoreLogin',
@@ -108,6 +111,8 @@ export default {
       isLogIn: true,
       email: '',
       password: '',
+      passwordValid: true,
+      passwordErrorMessage: '',
       createAccount: false,
       rememberMe: false,
       firstName: '',
@@ -127,6 +132,47 @@ export default {
       this.rememberMe = false;
       this.firstName = '';
       this.lastName = '';
+    },
+  },
+  methods: {
+    signup() {
+      auth.createUserWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+          this.$emit('close');
+          db.collection('users').doc(user.user.uid).set({
+            firstName: this.firstName,
+            lastName: this.lastName,
+          })
+            .then(() => {
+              // eslint-disable-next-line no-alert
+              alert('Document written!');
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-alert
+              alert('Error in writing document: ', error);
+            });
+          this.$router.replace('/');
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          this.passwordValid = false;
+          this.passwordErrorMessage = error.message;
+        });
+    },
+    login() {
+      auth.signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$emit('close');
+          // eslint-disable-next-line no-alert
+          alert('ovde');
+          this.$router.replace('/');
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-alert
+          alert(error.message);
+          this.passwordValid = false;
+          this.passwordErrorMessage = error.message;
+        });
     },
   },
 };

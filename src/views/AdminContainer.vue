@@ -100,6 +100,7 @@
 // @ is an alias to /src
 // import {fb} from '../firebase';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { auth } from '../firebase';
 
 export default {
   name: 'AdminContainer',
@@ -110,26 +111,20 @@ export default {
       isToggled: true,
     };
   },
-  //   methods:{
-  //       closeMenu(){
-  //         $(".page-wrapper").toggleClass("toggled");
-  //       },
-  //       logout(){
-  //           fb.auth().signOut()
-  //           .then(() => {
-  //               this.$router.replace('/');
-  //           })
-  //           .catch((err) =>{
-  //               console.log(err);
-  //           });
-  //       }
-  //   },
-
-  //   created(){
-  //       let user = fb.auth().currentUser;
-  //       this.email = user.email;
-
-//   }
+  methods: {
+    logout() {
+      auth().signOut()
+        .then(() => {
+          this.$router.replace('/');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  created() {
+    this.email = auth().currentUser.email;
+  },
 };
 </script>
 <style scoped lang="scss">
