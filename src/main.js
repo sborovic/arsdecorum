@@ -7,6 +7,14 @@ import '@storefront-ui/vue/styles.scss';
 
 Vue.config.productionTip = false;
 
+// Global app properties
+Vue.prototype.$shopName = 'bArs Decorum';
+Vue.mixin({
+  created() {
+    console.log(`[created] ${this.$options.name}`);
+  },
+});
+
 /* Ensures Firebase initializes
 before loading the app
 when a user refreshes a page */

@@ -4,25 +4,20 @@
       :class="customClass"
       :title="title"
       :logo="logo"
-      :active-icon="activeIcon"
       :search-placeholder="searchPlaceholder"
       :search-value="searchValue"
-      :cart-icon="cartIcon"
-      :wishlist-icon="wishlistIcon"
       :is-sticky="isSticky"
-      :account-icon="accountIcon"
-      :style="spacer"
-      :cart-items-qty="cartItemsQty"
-      :wishlist-items-qty="wishlistItemsQty"
       @click:cart="alert('@click:cart')"
       @click:wishlist="alert('@click:wishlist')"
-      @click:account="isModalVisible = true"
       @change:search="searchValue = $event"
     >
       <template #navigation>
         <SfHeaderNavigationItem v-for="item in navigation" :key="item">
           <SfLink :link="{ name: item }">{{ item }}</SfLink>
         </SfHeaderNavigationItem>
+      </template>
+      <template #header-icons>
+        <StoreHeaderIcons @click:account="isModalVisible = true"/>
       </template>
     </SfHeader>
     <StoreLogin :visible="isModalVisible" @close="isModalVisible = false"/>
@@ -32,27 +27,25 @@
 import { SfHeader, SfLink } from '@storefront-ui/vue';
 import SiteLogo from '@/assets/logo.svg';
 import StoreLogin from '@/components/StoreLogin.vue';
+import StoreHeaderIcons from '@/components/StoreHeaderIcons.vue';
 
 export default {
   components: {
     SfHeader,
     SfLink,
     StoreLogin,
+    StoreHeaderIcons,
   },
   data() {
     return {
-      isMobile: false,
       isModalVisible: false,
       navigation: ['Home', 'Products', 'About'],
       searchValue: '',
-      title: 'ArsDecorum',
+      title: this.$appName,
       logo: SiteLogo,
-      activeIcon: 'account',
+      activeIcon: 'profile',
       isSticky: true,
       searchPlaceholder: 'Search for items',
-      cartIcon: 'empty_cart',
-      wishlistIcon: 'heart',
-      accountIcon: 'profile',
       cartItemsQty: '0',
       wishlistItemsQty: '0',
       customClass: [

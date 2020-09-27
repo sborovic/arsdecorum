@@ -1,7 +1,6 @@
 <template>
   <SfHero :style="{ maxWidth: '1240px', margin: 'auto' }">
     <SfHeroItem
-      :class="customClass"
       :title="title"
       :subtitle="subtitle"
       :button-text="buttonText"
@@ -9,7 +8,6 @@
       :background="background"
     />
     <SfHeroItem
-      :class="customClass"
       title="Colorful summer dresses are already in store"
       subtitle="Summer Collection 2019"
       button-text="Learn more"
