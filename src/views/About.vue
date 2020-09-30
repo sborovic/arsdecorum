@@ -1,24 +1,15 @@
 <template>
-  <div class="home">
-    <StoreHeader/>
-          <p>About</p>
-    <StoreHero/>
-    <StoreFooter/>
+  <div>
+      <p>[ ABOUT ]</p>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import StoreHeader from '@/components/StoreHeader.vue';
-import StoreHero from '@/components/StoreHero.vue';
-import StoreFooter from '@/components/StoreFooter.vue';
 
 export default {
   name: 'About',
   components: {
-    StoreHeader,
-    StoreHero,
-    StoreFooter,
   },
 };
 </script>
