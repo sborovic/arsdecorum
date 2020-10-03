@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="visible" :title="modalTitle" @close="this.$emit('close')">
+  <SfModal id="login" :visible="visible" :title="modalTitle" @close="$emit('close')">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
