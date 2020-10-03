@@ -30,15 +30,10 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'Admin',
     meta: {
       requiresAuth: true,
     },
     children: [
-      {
-        path: '', // Default component
-        component: () => import(/* webpackChunkName: "admin_overview" */ '../components/AdminOverview.vue'),
-      },
       {
         path: 'overview',
         name: 'AdminOverview',
@@ -53,6 +48,10 @@ const routes = [
         path: 'orders',
         name: 'AdminOrders',
         component: () => import(/* webpackChunkName: "admin_orders" */ '../components/AdminOrders.vue'),
+      },
+      {
+        path: '', // Default component
+        component: () => import(/* webpackChunkName: "admin_overview" */ '../components/AdminOverview.vue'),
       },
     ],
     component: () => import(/* webpackChunkName: "admin" */ '../views/AdminContainer.vue'),

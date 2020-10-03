@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="visible" :title="modalTitle" @close="$emit('close')">
+  <SfModal id="login" :visible="visible" :title="modalTitle" @close="close">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
@@ -111,8 +111,8 @@ export default {
       isLogIn: true,
       email: '',
       password: '',
-      passwordValid: true,
-      passwordErrorMessage: '',
+      passwordValid: false,
+      passwordErrorMessage: 'porukas',
       createAccount: false,
       rememberMe: false,
       firstName: '',
@@ -126,6 +126,11 @@ export default {
   },
   watch: {
     isLogIn() {
+      this.resetAll();
+    },
+  },
+  methods: {
+    resetAll() {
       this.email = '';
       this.password = '';
       this.createAccount = false;
@@ -133,8 +138,10 @@ export default {
       this.firstName = '';
       this.lastName = '';
     },
-  },
-  methods: {
+    close() {
+      this.resetAll();
+      this.$emit('close');
+    },
     signup() {
       auth.createUserWithEmailAndPassword(this.email, this.password)
         .then((user) => {
