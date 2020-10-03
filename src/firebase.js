@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
+/*
 // Utilities
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -23,13 +23,7 @@ const auth = firebase.auth();
 // Collection references
 const usersCollection = db.collection('users');
 const productsCollection = db.collection('products');
-
+*/
 // Export utilites and references
-export {
-  db,
-  auth,
-  usersCollection,
-  productsCollection,
-};
 
 // firebase.analytics();

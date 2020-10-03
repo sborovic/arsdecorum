@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="visible" :title="modalTitle" @close="close">
+  <SfModal id="login" :visible="visible" :title="modalTitle" @close="this.$emit('close')">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
@@ -72,7 +72,7 @@
             :valid="passwordValid"
             :error-message="passwordErrorMessage"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signup'>
+          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signUp'>
             Create an account
           </SfButton>
         </form>
@@ -92,7 +92,7 @@ import {
   SfCheckbox,
   SfHeading,
 } from '@storefront-ui/vue';
-import { auth, db } from '../firebase';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'StoreLogin',
@@ -111,8 +111,8 @@ export default {
       isLogIn: true,
       email: '',
       password: '',
-      passwordValid: false,
-      passwordErrorMessage: 'porukas',
+      passwordValid: true,
+      passwordErrorMessage: '',
       createAccount: false,
       rememberMe: false,
       firstName: '',
@@ -130,6 +130,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['signUpAction']),
     resetAll() {
       this.email = '';
       this.password = '';
@@ -142,44 +143,8 @@ export default {
       this.resetAll();
       this.$emit('close');
     },
-    signup() {
-      auth.createUserWithEmailAndPassword(this.email, this.password)
-        .then((user) => {
-          this.$emit('close');
-          db.collection('users').doc(user.user.uid).set({
-            firstName: this.firstName,
-            lastName: this.lastName,
-          })
-            .then(() => {
-              // eslint-disable-next-line no-alert
-              alert('Document written!');
-            })
-            .catch((error) => {
-              // eslint-disable-next-line no-alert
-              alert('Error in writing document: ', error);
-            });
-          this.$router.replace('/');
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-alert
-          this.passwordValid = false;
-          this.passwordErrorMessage = error.message;
-        });
-    },
-    login() {
-      auth.signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$emit('close');
-          // eslint-disable-next-line no-alert
-          alert('ovde');
-          this.$router.replace('/');
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-alert
-          alert(error.message);
-          this.passwordValid = false;
-          this.passwordErrorMessage = error.message;
-        });
+    signUp() {
+      this.signUpAction({ email: this.email, password: this.password });
     },
   },
 };
