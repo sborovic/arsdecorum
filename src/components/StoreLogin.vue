@@ -16,6 +16,8 @@
             label="Password"
             type="password"
             class="form__element"
+            :valid="!error"
+            :error-message="errorMessage"
             :has-show-password="true"
           />
           <SfCheckbox
@@ -24,7 +26,7 @@
             label="Remember me"
             class="form__element form__checkbox"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit" @click='login'>
+          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signIn'>
             Log In
           </SfButton>
         </form>
@@ -69,8 +71,8 @@
             label="Password"
             type="password"
             class="form__element"
-            :valid="passwordValid"
-            :error-message="passwordErrorMessage"
+            :valid="!error"
+            :error-message="errorMessage"
           />
           <SfButton type="submit" class="sf-button--full-width form__submit" @click='signUp'>
             Create an account
@@ -92,7 +94,7 @@ import {
   SfCheckbox,
   SfHeading,
 } from '@storefront-ui/vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'StoreLogin',
@@ -111,8 +113,6 @@ export default {
       isLogIn: true,
       email: '',
       password: '',
-      passwordValid: true,
-      passwordErrorMessage: '',
       createAccount: false,
       rememberMe: false,
       firstName: '',
@@ -120,6 +120,9 @@ export default {
     };
   },
   computed: {
+    ...mapState(['getError']),
+    errorMessage() { return this.getError; },
+    error() { return !!this.getError; },
     modalTitle() {
       return this.isLogIn ? 'Log In' : 'Join Vue Storefront';
     },
@@ -130,7 +133,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['signUpAction']),
+    ...mapActions(['signUpAction', 'signInAction']),
     resetAll() {
       this.email = '';
       this.password = '';
@@ -145,6 +148,11 @@ export default {
     },
     signUp() {
       this.signUpAction({ email: this.email, password: this.password });
+      this.close();
+    },
+    signIn() {
+      this.signInAction({ email: this.email, password: this.password });
+      this.close();
     },
   },
 };

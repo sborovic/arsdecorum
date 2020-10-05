@@ -13,7 +13,7 @@
                     'sf-header__icon--is-active': activeIcon === 'account',
                   }"
         />
-        <p>{{ customLabel }}</p>
+        <p v-if="isUserAuth">Welcome, {{ customLabel }}!</p>
       </SfButton>
       <SfButton
         v-if="wishlistIcon"
@@ -53,6 +53,7 @@
 
 <script>
 import { SfButton, SfIcon } from '@storefront-ui/vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'StoreHeaderIcons',
@@ -106,21 +107,17 @@ export default {
       type: [String, Number],
       default: '0',
     },
-    customLabel: {
-      type: String,
-      default: 'Log In or Sign Up',
-    },
-    linkName: {
-      type: String,
-      default: '',
-    },
   },
   computed: {
+    ...mapGetters(['getUser', 'isUserAuth']),
     cartHasProducts() {
       return parseInt(this.cartItemsQty, 10) > 0;
     },
     wishlistHasProducts() {
       return parseInt(this.wishlistItemsQty, 10) > 0;
+    },
+    customLabel() {
+      return this.getUser.email;
     },
   },
 };

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import StoreLayout from '../layouts/StoreLayout.vue';
-import { auth } from '../firebase';
 
 Vue.use(VueRouter);
 
@@ -65,15 +64,5 @@ const router = new VueRouter({
 });
 
 // Navigation guard to check for logged in users
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
-  if (requiresAuth && !auth.currentUser) {
-    next('/');
-  } else if (requiresAuth && auth.currentUser) {
-    next();
-  } else {
-    next();
-  }
-});
 
 export default router;
