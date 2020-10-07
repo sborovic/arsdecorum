@@ -13,7 +13,8 @@
                     'sf-header__icon--is-active': activeIcon === 'account',
                   }"
         />
-        <p v-if="isUserAuth">Welcome, {{ customLabel }}!</p>
+        <span v-show="isUserAuth">Jovana</span>
+        <SfChevron v-show="isUserAuth"></SfChevron>
       </SfButton>
       <SfButton
         v-if="wishlistIcon"
@@ -52,7 +53,7 @@
 </template>
 
 <script>
-import { SfButton, SfIcon } from '@storefront-ui/vue';
+import { SfButton, SfIcon, SfChevron } from '@storefront-ui/vue';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -60,6 +61,7 @@ export default {
   components: {
     SfButton,
     SfIcon,
+    SfChevron,
   },
   props: {
     /**
@@ -109,7 +111,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getUser', 'isUserAuth']),
+    ...mapGetters('authentication', ['getUser', 'isUserAuth']),
     cartHasProducts() {
       return parseInt(this.cartItemsQty, 10) > 0;
     },

@@ -120,7 +120,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['getError']),
+    ...mapState('authentication', ['getError']),
     errorMessage() { return this.getError; },
     error() { return !!this.getError; },
     modalTitle() {
@@ -133,7 +133,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['signUpAction', 'signInAction']),
+    ...mapActions('authentication', ['signUpAction', 'signInAction']),
     resetAll() {
       this.email = '';
       this.password = '';
