@@ -13,8 +13,10 @@
                     'sf-header__icon--is-active': activeIcon === 'account',
                   }"
         />
-        <span v-show="isUserAuth">Jovana</span>
-        <SfChevron v-show="isUserAuth"></SfChevron>
+        <template v-if="isUserAuth">
+          {{ customLabel }}
+          <SfChevron/>
+        </template>
       </SfButton>
       <SfButton
         v-if="wishlistIcon"

@@ -17,10 +17,10 @@
         </SfHeaderNavigationItem>
       </template>
       <template #header-icons>
-        <StoreHeaderIcons @click:account="isModalVisible = true"/>
+        <StoreHeaderIcons @click:account="showModal"/>
       </template>
     </SfHeader>
-    <StoreLogin :visible="isModalVisible" @close="isModalVisible = false"/>
+    <StoreLogin v-show="modalVisible"/>
   </div>
 </template>
 <script>
@@ -28,6 +28,7 @@ import { SfHeader, SfLink } from '@storefront-ui/vue';
 import SiteLogo from '@/assets/logo.svg';
 import StoreLogin from '@/components/StoreLogin.vue';
 import StoreHeaderIcons from '@/components/StoreHeaderIcons.vue';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -38,7 +39,6 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false,
       navigation: ['Home', 'Products', 'About'],
       searchValue: '',
       title: this.$appName,
@@ -53,6 +53,12 @@ export default {
         'sf-header--has-mobile-search',
       ],
     };
+  },
+  methods: {
+    ...mapMutations('modal', ['showModal']),
+  },
+  computed: {
+    ...mapState('modal', ['modalVisible']),
   },
 };
 </script>

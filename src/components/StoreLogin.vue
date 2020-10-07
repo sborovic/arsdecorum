@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="visible" :title="modalTitle" @close="$emit('close')">
+  <SfModal id="login" :visible="true" :title="modalTitle" @close="hideModal">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
@@ -16,8 +16,6 @@
             label="Password"
             type="password"
             class="form__element"
-            :valid="!error"
-            :error-message="errorMessage"
             :has-show-password="true"
           />
           <SfCheckbox
@@ -71,8 +69,6 @@
             label="Password"
             type="password"
             class="form__element"
-            :valid="!error"
-            :error-message="errorMessage"
           />
           <SfButton type="submit" class="sf-button--full-width form__submit" @click='signUp'>
             Create an account
@@ -94,7 +90,7 @@ import {
   SfCheckbox,
   SfHeading,
 } from '@storefront-ui/vue';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'StoreLogin',
@@ -104,9 +100,6 @@ export default {
     SfButton,
     SfCheckbox,
     SfHeading,
-  },
-  props: {
-    visible: Boolean,
   },
   data() {
     return {
@@ -120,7 +113,6 @@ export default {
     };
   },
   computed: {
-    ...mapState('authentication', ['getError']),
     errorMessage() { return this.getError; },
     error() { return !!this.getError; },
     modalTitle() {
@@ -134,6 +126,7 @@ export default {
   },
   methods: {
     ...mapActions('authentication', ['signUpAction', 'signInAction']),
+    ...mapMutations('modal', ['hideModal']),
     resetAll() {
       this.email = '';
       this.password = '';
@@ -142,17 +135,13 @@ export default {
       this.firstName = '';
       this.lastName = '';
     },
-    close() {
-      this.resetAll();
-      this.$emit('close');
-    },
     signUp() {
       this.signUpAction({ email: this.email, password: this.password });
-      this.close();
+      this.hideModal();
     },
     signIn() {
       this.signInAction({ email: this.email, password: this.password });
-      this.close();
+      this.hideModal();
     },
   },
 };
