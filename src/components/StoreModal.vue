@@ -1,5 +1,5 @@
 <template>
-  <SfModal id="login" :visible="true" :title="modalTitle" @close="hideModal">
+  <SfModal id="login" :visible="modalVisible" :title="modalTitle" @close="hideModal">
     <transition name="sf-fade" mode="out-in">
       <div v-if="isLogIn" key="log-in" class="modal-content">
         <form class="form" @submit.prevent="() => false">
@@ -47,7 +47,7 @@
           <SfInput
             v-model.trim="firstName"
             name="first-name"
-            label="Name"
+            label="First Name"
             class="form__element"
           />
           <SfInput
@@ -90,10 +90,10 @@ import {
   SfCheckbox,
   SfHeading,
 } from '@storefront-ui/vue';
-import { mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'StoreLogin',
+  name: 'StoreModal',
   components: {
     SfModal,
     SfInput,
@@ -113,6 +113,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('modal', ['modalVisible']),
     errorMessage() { return this.getError; },
     error() { return !!this.getError; },
     modalTitle() {
@@ -126,7 +127,10 @@ export default {
   },
   methods: {
     ...mapActions('authentication', ['signUpAction', 'signInAction']),
-    ...mapMutations('modal', ['hideModal']),
+    hideModal() {
+      this.resetAll();
+      this.$store.commit('modal/hideModal');
+    },
     resetAll() {
       this.email = '';
       this.password = '';

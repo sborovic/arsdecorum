@@ -20,21 +20,21 @@
         <StoreHeaderIcons @click:account="showModal"/>
       </template>
     </SfHeader>
-    <StoreLogin v-show="modalVisible"/>
+    <StoreModal/>
   </div>
 </template>
 <script>
 import { SfHeader, SfLink } from '@storefront-ui/vue';
 import SiteLogo from '@/assets/logo.svg';
-import StoreLogin from '@/components/StoreLogin.vue';
+import StoreModal from '@/components/StoreModal.vue';
 import StoreHeaderIcons from '@/components/StoreHeaderIcons.vue';
-import { mapState, mapMutations } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   components: {
     SfHeader,
     SfLink,
-    StoreLogin,
+    StoreModal,
     StoreHeaderIcons,
   },
   data() {
@@ -56,9 +56,6 @@ export default {
   },
   methods: {
     ...mapMutations('modal', ['showModal']),
-  },
-  computed: {
-    ...mapState('modal', ['modalVisible']),
   },
 };
 </script>

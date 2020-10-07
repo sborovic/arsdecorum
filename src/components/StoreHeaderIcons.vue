@@ -92,7 +92,7 @@ export default {
      */
     activeIcon: {
       type: String,
-      default: 'account',
+      default: '',
       validator(value) {
         return ['', 'account', 'wishlist', 'cart'].includes(value);
       },
