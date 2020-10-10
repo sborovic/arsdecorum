@@ -17,7 +17,7 @@
         </SfHeaderNavigationItem>
       </template>
       <template #header-icons>
-        <StoreHeaderIcons @click:account="showModal"/>
+        <StoreHeaderIcons @click:account="openAccountMenu"/>
       </template>
     </SfHeader>
     <StoreModal/>
@@ -55,7 +55,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('modal', ['showModal']),
+    ...mapMutations({
+      showModal: 'modal/showModal',
+      openAccountMenu: 'menu/openMenu',
+    }),
   },
 };
 </script>

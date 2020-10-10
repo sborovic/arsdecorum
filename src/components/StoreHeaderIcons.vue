@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="sf-header__icons">
       <SfButton
         v-if="accountIcon"
@@ -18,6 +17,10 @@
           <SfChevron/>
         </template>
       </SfButton>
+      <StoreHeaderIconsMenu
+        name="Milojza"
+        :actionList="['Option1', 'Option2','35erre']"
+        />
       <SfButton
         v-if="wishlistIcon"
         class="sf-button--pure sf-header__action"
@@ -51,12 +54,12 @@
         />
       </SfButton>
     </div>
-  </div>
 </template>
 
 <script>
 import { SfButton, SfIcon, SfChevron } from '@storefront-ui/vue';
 import { mapGetters } from 'vuex';
+import StoreHeaderIconsMenu from '@/components/StoreHeaderIconsMenu.vue';
 
 export default {
   name: 'StoreHeaderIcons',
@@ -64,6 +67,7 @@ export default {
     SfButton,
     SfIcon,
     SfChevron,
+    StoreHeaderIconsMenu,
   },
   props: {
     /**
