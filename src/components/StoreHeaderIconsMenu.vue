@@ -33,10 +33,14 @@ export default {
     SfButton,
   },
   created() {
-    this.$store.registerModule([this.namespace, this.name], menu);
+    if (!this.$store.hasModule([this.namespace, this.name])) {
+      this.$store.registerModule([this.namespace, this.name], menu);
+    }
   },
   beforeDestroy() {
-    // this.$store.unregisterModule([this.namespace, this.name], menu);
+    if (this.$store.hasModule([this.namespace, this.name])) {
+      this.$store.unregisterModule([this.namespace, this.name], menu);
+    }
   },
   data() {
     return {
@@ -60,7 +64,6 @@ export default {
       required: true,
     },
   },
-
   computed: {
     ...mapState({
       open(state) {
@@ -69,23 +72,12 @@ export default {
     }),
   },
   methods: {
-    // ...mapMutations('menus/Mika', ['openMenu', 'closeMenu']),
     openMenu() {
       this.$store.commit(`${this.namespace}/${this.name}/openMenu`);
     },
     closeMenu() {
       this.$store.commit(`${this.namespace}/${this.name}/closeMenu`);
     },
-    // ...mapMutations({
-    //   openMenu(commit) {
-    //     console.log(`${this.namespace}/${this.name}/openMenu`);
-    //     commit(`${this.namespace}/${this.name}/openMenu`);
-    //   },
-    //   closeMenu(commit) {
-    //     console.log(`ovde${this.namespace}/${this.name}/closeMenu`);
-    //     commit(`${this.namespace}/${this.name}/closeMenu`);
-    //   },
-    // }),
   },
 };
 </script>
