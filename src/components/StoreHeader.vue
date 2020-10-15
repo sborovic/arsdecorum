@@ -17,7 +17,7 @@
         </SfHeaderNavigationItem>
       </template>
       <template #header-icons>
-        <StoreHeaderIcons @click:account="openAccountMenu"/>
+        <StoreHeaderIcons/>
       </template>
     </SfHeader>
     <StoreModal/>
@@ -28,7 +28,6 @@ import { SfHeader, SfLink } from '@storefront-ui/vue';
 import SiteLogo from '@/assets/logo.svg';
 import StoreModal from '@/components/StoreModal.vue';
 import StoreHeaderIcons from '@/components/StoreHeaderIcons.vue';
-import { mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -53,12 +52,6 @@ export default {
         'sf-header--has-mobile-search',
       ],
     };
-  },
-  methods: {
-    ...mapMutations({
-      showModal: 'modal/showModal',
-      openAccountMenu: 'menu/openMenu',
-    }),
   },
 };
 </script>

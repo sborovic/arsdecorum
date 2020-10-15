@@ -9,5 +9,8 @@ export default new Vuex.Store({
   modules: {
     authentication,
     modal,
+    menus: {
+      namespaced: true,
+    },
   },
 });

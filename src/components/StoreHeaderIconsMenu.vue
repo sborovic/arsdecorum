@@ -13,7 +13,7 @@
           <SfButton
             class="sf-button--full-width sf-button--underlined color-primary"
             @click="isOpen = false"
-            >vode{{ action }}</SfButton
+            >{{ action }}</SfButton
           >
         </SfListItem>
       </SfList>
@@ -22,7 +22,7 @@
 </template>
 <script>
 import { SfDropdown, SfList, SfButton } from '@storefront-ui/vue';
-import { mapMutations, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import menu from '@/store/menu';
 
 export default {
@@ -33,21 +33,24 @@ export default {
     SfButton,
   },
   created() {
-    this.$store.registerModule('menu', menu);
+    this.$store.registerModule([this.namespace, this.name], menu);
   },
   beforeDestroy() {
-    this.$store.unregisterModule('menu');
+    // this.$store.unregisterModule([this.namespace, this.name], menu);
   },
   data() {
     return {
       isOpen: true,
-      namespace: `menu/${this.name}`,
-      title: 'Chfghoose size',
+      title: 'Choose size',
       persistent: false,
       customClass: '',
     };
   },
   props: {
+    namespace: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -57,24 +60,32 @@ export default {
       required: true,
     },
   },
+
   computed: {
-    ...mapState('menu', ['open']),
-    // ...mapState({
-    //   // open(state) {
-    //   // return state[`${this.namespace}/open`];
-    //   // },
-    // }),
+    ...mapState({
+      open(state) {
+        return state[this.namespace][this.name].open;
+      },
+    }),
   },
   methods: {
+    // ...mapMutations('menus/Mika', ['openMenu', 'closeMenu']),
+    openMenu() {
+      this.$store.commit(`${this.namespace}/${this.name}/openMenu`);
+    },
+    closeMenu() {
+      this.$store.commit(`${this.namespace}/${this.name}/closeMenu`);
+    },
     // ...mapMutations({
     //   openMenu(commit) {
-    //     commit(`${this.namespace}/openMenu`);
+    //     console.log(`${this.namespace}/${this.name}/openMenu`);
+    //     commit(`${this.namespace}/${this.name}/openMenu`);
     //   },
     //   closeMenu(commit) {
-    //     commit(`${this.namespace}/closeMenu`);
+    //     console.log(`ovde${this.namespace}/${this.name}/closeMenu`);
+    //     commit(`${this.namespace}/${this.name}/closeMenu`);
     //   },
     // }),
-    ...mapMutations('menu', ['openMenu', 'closeMenu']),
   },
 };
 </script>

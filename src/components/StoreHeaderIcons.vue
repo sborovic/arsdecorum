@@ -3,7 +3,7 @@
       <SfButton
         v-if="accountIcon"
         class="sf-button--pure sf-header__action "
-        @click="$emit('click:account')"
+        @click="showAccount"
       >
         <SfIcon
           :icon="accountIcon"
@@ -15,12 +15,13 @@
         <template v-if="isUserAuth">
           {{ customLabel }}
           <SfChevron/>
+          <StoreHeaderIconsMenu
+            :namespace="menusNamespace"
+            :name="accountMenu"
+            :actionList="['Option1', 'Option2',]"
+            />
         </template>
       </SfButton>
-      <StoreHeaderIconsMenu
-        name="Milojza"
-        :actionList="['Option1', 'Option2','35erre']"
-        />
       <SfButton
         v-if="wishlistIcon"
         class="sf-button--pure sf-header__action"
@@ -58,7 +59,7 @@
 
 <script>
 import { SfButton, SfIcon, SfChevron } from '@storefront-ui/vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import StoreHeaderIconsMenu from '@/components/StoreHeaderIconsMenu.vue';
 
 export default {
@@ -68,6 +69,12 @@ export default {
     SfIcon,
     SfChevron,
     StoreHeaderIconsMenu,
+  },
+  data() {
+    return {
+      menusNamespace: 'menus',
+      accountMenu: 'accountMenu',
+    };
   },
   props: {
     /**
@@ -126,6 +133,21 @@ export default {
     },
     customLabel() {
       return this.getUser.email;
+    },
+  },
+  methods: {
+    ...mapMutations({
+      showModal: 'modal/showModal',
+      openAccountMenu(commit) {
+        commit(`${this.menusNamespace}/${this.accountMenu}/openMenu`);
+      },
+    }),
+    showAccount() {
+      if (!this.isUserAuth) {
+        this.showModal();
+      } else {
+        this.openAccountMenu();
+      }
     },
   },
 };

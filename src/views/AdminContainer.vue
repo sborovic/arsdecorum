@@ -100,7 +100,6 @@
 // @ is an alias to /src
 // import {fb} from '../firebase';
 import '@fortawesome/fontawesome-free/css/all.css';
-import { auth } from '../firebase';
 
 export default {
   name: 'AdminContainer',
@@ -113,17 +112,9 @@ export default {
   },
   methods: {
     logout() {
-      auth().signOut()
-        .then(() => {
-          this.$router.replace('/');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
   created() {
-    this.email = auth().currentUser.email;
   },
 };
 </script>
