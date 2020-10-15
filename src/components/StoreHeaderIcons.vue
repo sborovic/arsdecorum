@@ -1,5 +1,6 @@
 <template>
     <div class="sf-header__icons">
+      <div>
       <SfButton
         v-if="accountIcon"
         class="sf-button--pure sf-header__action "
@@ -15,14 +16,17 @@
         <template v-if="isUserAuth">
           {{ customLabel }}
           <SfChevron/>
-          <StoreHeaderIconsMenu
-            :namespace="menusNamespace"
-            :name="accountMenu"
-            :action-list="['option1', 'option2']"
-            >
-          </StoreHeaderIconsMenu>
         </template>
       </SfButton>
+      <StoreHeaderIconsMenu
+        v-if="isUserAuth"
+        :namespace="menusNamespace"
+        :name="accountMenu"
+        :action-list="['option1', 'option2']"
+        >
+      </StoreHeaderIconsMenu>
+      </div>
+      <div>
       <SfButton
         v-if="wishlistIcon"
         class="sf-button--pure sf-header__action"
@@ -38,15 +42,15 @@
                     'sf-header__icon--is-active': activeIcon === 'wishlist',
                   }"
         />
-        <template>
-          <SfChevron/>
-          <StoreHeaderIconsMenu
-            :namespace="menusNamespace"
-            :name="wishlistMenu"
-            :actionList="['wish1', 'wish2']"
-            />
-        </template>
+        <SfChevron/>
       </SfButton>
+      <StoreHeaderIconsMenu
+        :namespace="menusNamespace"
+        :name="wishlistMenu"
+        :actionList="['wish1', 'wish2']"
+        />
+      </div>
+      <div>
       <SfButton
         v-if="cartIcon"
         class="sf-button--pure sf-header__action"
@@ -62,15 +66,14 @@
                     'sf-header__icon--is-active': activeIcon === 'cart',
                   }"
         />
-        <template>
-          <SfChevron/>
-          <StoreHeaderIconsMenu
-            :namespace="menusNamespace"
-            :name="cartMenu"
-            :actionList="['cart1', 'cart2']"
-            />
-        </template>
+        <SfChevron/>
       </SfButton>
+      <StoreHeaderIconsMenu
+        :namespace="menusNamespace"
+        :name="cartMenu"
+        :actionList="['cartjhghjkjhghjklkjhghjkjhghj1', 'cart2']"
+        />
+        </div>
     </div>
 </template>
 

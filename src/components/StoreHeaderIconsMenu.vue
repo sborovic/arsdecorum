@@ -82,3 +82,9 @@ export default {
   },
 };
 </script>
+
+<style lang='scss' scoped>
+.sf-dropdown {
+  --dropdown-width: auto;
+}
+</style>
