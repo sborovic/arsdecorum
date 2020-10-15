@@ -18,14 +18,15 @@
           <StoreHeaderIconsMenu
             :namespace="menusNamespace"
             :name="accountMenu"
-            :actionList="['Option1', 'Option2',]"
-            />
+            :action-list="['option1', 'option2']"
+            >
+          </StoreHeaderIconsMenu>
         </template>
       </SfButton>
       <SfButton
         v-if="wishlistIcon"
         class="sf-button--pure sf-header__action"
-        @click="$emit('click:wishlist')"
+        @click="openWishlistMenu"
       >
         <SfIcon
           class="sf-header__icon"
@@ -37,11 +38,19 @@
                     'sf-header__icon--is-active': activeIcon === 'wishlist',
                   }"
         />
+        <template>
+          <SfChevron/>
+          <StoreHeaderIconsMenu
+            :namespace="menusNamespace"
+            :name="wishlistMenu"
+            :actionList="['wish1', 'wish2']"
+            />
+        </template>
       </SfButton>
       <SfButton
         v-if="cartIcon"
         class="sf-button--pure sf-header__action"
-        @click="$emit('click:cart')"
+        @click="openCartMenu"
       >
         <SfIcon
           class="sf-header__icon"
@@ -53,6 +62,14 @@
                     'sf-header__icon--is-active': activeIcon === 'cart',
                   }"
         />
+        <template>
+          <SfChevron/>
+          <StoreHeaderIconsMenu
+            :namespace="menusNamespace"
+            :name="cartMenu"
+            :actionList="['cart1', 'cart2']"
+            />
+        </template>
       </SfButton>
     </div>
 </template>
@@ -74,6 +91,8 @@ export default {
     return {
       menusNamespace: 'menus',
       accountMenu: 'accountMenu',
+      wishlistMenu: 'wishlistMenu',
+      cartMenu: 'cartMenu',
     };
   },
   props: {
@@ -140,6 +159,12 @@ export default {
       showModal: 'modal/showModal',
       openAccountMenu(commit) {
         commit(`${this.menusNamespace}/${this.accountMenu}/openMenu`);
+      },
+      openWishlistMenu(commit) {
+        commit(`${this.menusNamespace}/${this.wishlistMenu}/openMenu`);
+      },
+      openCartMenu(commit) {
+        commit(`${this.menusNamespace}/${this.cartMenu}/openMenu`);
       },
     }),
     showAccount() {

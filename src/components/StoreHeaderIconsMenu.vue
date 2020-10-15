@@ -8,15 +8,17 @@
     :title="title"
   >
     <template>
-      <SfList>
-        <SfListItem v-for="(action, key) in actionList" :key="key">
-          <SfButton
-            class="sf-button--full-width sf-button--underlined color-primary"
-            @click="isOpen = false"
-            >{{ action }}</SfButton
-          >
-        </SfListItem>
-      </SfList>
+      <slot>
+        <SfList>
+          <SfListItem v-for="(action, key) in actionList" :key="key">
+            <SfButton
+              class="sf-button--full-width sf-button--underlined color-primary"
+              @click="closeMenu"
+              >{{ action }}</SfButton
+            >
+          </SfListItem>
+        </SfList>
+      </slot>
     </template>
   </SfDropdown>
 </template>
@@ -44,7 +46,6 @@ export default {
   },
   data() {
     return {
-      isOpen: true,
       title: 'Choose size',
       persistent: false,
       customClass: '',
@@ -61,7 +62,7 @@ export default {
     },
     actionList: {
       type: Array,
-      required: true,
+      default: () => [''],
     },
   },
   computed: {
