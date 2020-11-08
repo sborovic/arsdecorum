@@ -1,99 +1,122 @@
 <template>
-    <div class="page-wrapper default-theme sidebar-bg"
-    :class="{ toggled: isToggled }">
-        <!-- show-sidebar -->
-        <div id="show-sidebar" class="btn btn-sm btn-dark"
-        @click="isToggled = !isToggled">
-            <i class="fas fa-bars"></i>
-        </div> <!-- end of show-sidebar -->
-        <nav id="sidebar" class="sidebar-wrapper">
-            <!-- sidebar-content -->
-            <div class="sidebar-content">
-                <!-- sidebar-brand  -->
-                <div class="sidebar-item sidebar-brand">
-                    <router-link :to="{ name: Admin }">Vue Shop Admin Page
-                    </router-link>
-                    <div id="close-sidebar"
-                        @click="isToggled = !isToggled">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </div>
-                <!-- sidebar-header  -->
-                <div class="sidebar-item sidebar-header">
-                    <div class="user-pic">
-                        <img class="img-responsive img-rounded"
-                        src="/img/user.png" alt="User profile picture">
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">John
-                            <strong>Smith</strong>
-                        </span>
-                        <span class="user-role"> {{ email }} </span>
-                        <span class="user-status">
-                            <i class="fa fa-circle"></i>
-                            <span>Online</span>
-                        </span>
-                    </div>
-                </div>
-                <!-- sidebar-search  -->
-                <div class="sidebar-item sidebar-search">
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control search-menu"
-                            placeholder="Search...">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- sidebar-menu  -->
-                <div class="sidebar-item sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>Menu</span>
-                        </li>
-                        <li>
-                            <router-link to="/admin/overview">
-                                <i class="fa fa-chart-line"></i>
-                                <span>Overview</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/admin/products">
-                                <i class="fas fa-store"></i>
-                                <span>Products</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/admin/orders">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Orders</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/admin/profile">
-                                <i class="fa fa-user"></i>
-                                <span>Profile</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <a href="#" @click="logout()">
-                                <i class="fa fa-power-off"></i>
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div> <!-- end of sidebar-menu  -->
-            </div> <!-- end of sidebar-content -->
-        </nav>
-        <main class="page-content">
-            <router-view/>
-        </main>
-    </div> <!-- end of page-wrapper -->
-    <!-- page-wrapper -->
+  <div
+    class="page-wrapper default-theme sidebar-bg"
+    :class="{ toggled: isToggled }"
+  >
+    <!-- show-sidebar -->
+    <div
+      id="show-sidebar"
+      class="btn btn-sm btn-dark"
+      @click="isToggled = !isToggled"
+    >
+      <i class="fas fa-bars" />
+    </div> <!-- end of show-sidebar -->
+    <nav
+      id="sidebar"
+      class="sidebar-wrapper"
+    >
+      <!-- sidebar-content -->
+      <div class="sidebar-content">
+        <!-- sidebar-brand  -->
+        <div class="sidebar-item sidebar-brand">
+          <router-link :to="{ name: Admin }">
+            Vue Shop Admin Page
+          </router-link>
+          <div
+            id="close-sidebar"
+            @click="isToggled = !isToggled"
+          >
+            <i class="fas fa-times" />
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        <div class="sidebar-item sidebar-header">
+          <div class="user-pic">
+            <img
+              class="img-responsive img-rounded"
+              src="/img/user.png"
+              alt="User profile picture"
+            >
+          </div>
+          <div class="user-info">
+            <span class="user-name">John
+              <strong>Smith</strong>
+            </span>
+            <span class="user-role"> {{ email }} </span>
+            <span class="user-status">
+              <i class="fa fa-circle" />
+              <span>Online</span>
+            </span>
+          </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-item sidebar-search">
+          <div>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control search-menu"
+                placeholder="Search..."
+              >
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i
+                    class="fa fa-search"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar-menu  -->
+        <div class="sidebar-item sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span>Menu</span>
+            </li>
+            <li>
+              <router-link to="/admin/overview">
+                <i class="fa fa-chart-line" />
+                <span>Overview</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/products">
+                <i class="fas fa-store" />
+                <span>Products</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/orders">
+                <i class="fa fa-shopping-cart" />
+                <span>Orders</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/profile">
+                <i class="fa fa-user" />
+                <span>Profile</span>
+              </router-link>
+            </li>
+            <li>
+              <a
+                href="#"
+                @click="logout()"
+              >
+                <i class="fa fa-power-off" />
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div> <!-- end of sidebar-menu  -->
+      </div> <!-- end of sidebar-content -->
+    </nav>
+    <main class="page-content">
+      <router-view />
+    </main>
+  </div> <!-- end of page-wrapper -->
+  <!-- page-wrapper -->
 </template>
 
 <script>
@@ -110,11 +133,11 @@ export default {
       isToggled: true,
     };
   },
+  created() {
+  },
   methods: {
     logout() {
     },
-  },
-  created() {
   },
 };
 </script>

@@ -1,8 +1,23 @@
 <template>
-  <SfModal id="login" :visible="modalVisible" :title="modalTitle" @close="hideModal">
-    <transition name="sf-fade" mode="out-in">
-      <div v-if="isLogIn" key="log-in" class="modal-content">
-        <form class="form" @submit.prevent="() => false">
+  <SfModal
+    id="login"
+    :visible="modalVisible"
+    :title="modalTitle"
+    @close="hideModal"
+  >
+    <transition
+      name="sf-fade"
+      mode="out-in"
+    >
+      <div
+        v-if="isLogIn"
+        key="log-in"
+        class="modal-content"
+      >
+        <form
+          class="form"
+          @submit.prevent="() => false"
+        >
           <SfInput
             v-model.trim="email"
             name="email"
@@ -24,7 +39,11 @@
             label="Remember me"
             class="form__element form__checkbox"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signIn'>
+          <SfButton
+            type="submit"
+            class="sf-button--full-width form__submit"
+            @click="signIn"
+          >
             Log In
           </SfButton>
         </form>
@@ -37,13 +56,23 @@
             :level="3"
             class="aside__heading"
           />
-          <SfButton class="sf-button--text" @click="isLogIn = false">
+          <SfButton
+            class="sf-button--text"
+            @click="isLogIn = false"
+          >
             Register now
           </SfButton>
         </div>
       </div>
-      <div v-else key="sign-up" class="modal-content">
-        <form class="form" @submit.prevent="() => false">
+      <div
+        v-else
+        key="sign-up"
+        class="modal-content"
+      >
+        <form
+          class="form"
+          @submit.prevent="() => false"
+        >
           <SfInput
             v-model.trim="firstName"
             name="first-name"
@@ -70,11 +99,18 @@
             type="password"
             class="form__element"
           />
-          <SfButton type="submit" class="sf-button--full-width form__submit" @click='signUp'>
+          <SfButton
+            type="submit"
+            class="sf-button--full-width form__submit"
+            @click="signUp"
+          >
             Create an account
           </SfButton>
         </form>
-        <SfButton class="sf-button--text action-button" @click="isLogIn = true">
+        <SfButton
+          class="sf-button--text action-button"
+          @click="isLogIn = true"
+        >
           or Log In To Your Account
         </SfButton>
       </div>

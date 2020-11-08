@@ -12,15 +12,20 @@
       @change:search="searchValue = $event"
     >
       <template #navigation>
-        <SfHeaderNavigationItem v-for="item in navigation" :key="item">
-          <SfLink :link="{ name: item }">{{ item }}</SfLink>
+        <SfHeaderNavigationItem
+          v-for="item in navigation"
+          :key="item"
+        >
+          <SfLink :link="{ name: item }">
+            {{ item }}
+          </SfLink>
         </SfHeaderNavigationItem>
       </template>
       <template #header-icons>
-        <StoreHeaderIcons/>
+        <StoreHeaderIcons />
       </template>
     </SfHeader>
-    <StoreModal/>
+    <StoreModal />
   </div>
 </template>
 <script>

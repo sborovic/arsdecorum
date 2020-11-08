@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StoreHero/>
+    <StoreHero />
   </div>
 </template>
 

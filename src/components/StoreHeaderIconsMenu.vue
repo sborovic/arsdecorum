@@ -2,20 +2,24 @@
   <SfDropdown
     :class="customClass"
     :is-open="open"
-    @click:close="closeMenu"
-    @click:open="openMenu"
     :persistent="persistent"
     :title="title"
+    @click:close="closeMenu"
+    @click:open="openMenu"
   >
     <template>
       <slot>
         <SfList>
-          <SfListItem v-for="(action, key) in actionList" :key="key">
+          <SfListItem
+            v-for="(action, key) in actionList"
+            :key="key"
+          >
             <SfButton
               class="sf-button--full-width sf-button--underlined color-primary"
               @click="closeMenu"
-              >{{ action }}</SfButton
             >
+              {{ action }}
+            </SfButton>
           </SfListItem>
         </SfList>
       </slot>
@@ -34,23 +38,6 @@ export default {
     SfList,
     SfButton,
   },
-  created() {
-    if (!this.$store.hasModule([this.namespace, this.name])) {
-      this.$store.registerModule([this.namespace, this.name], menu);
-    }
-  },
-  beforeDestroy() {
-    if (this.$store.hasModule([this.namespace, this.name])) {
-      this.$store.unregisterModule([this.namespace, this.name], menu);
-    }
-  },
-  data() {
-    return {
-      title: 'Choose size',
-      persistent: false,
-      customClass: '',
-    };
-  },
   props: {
     namespace: {
       type: String,
@@ -65,12 +52,29 @@ export default {
       default: () => [''],
     },
   },
+  data() {
+    return {
+      title: 'Choose size',
+      persistent: false,
+      customClass: '',
+    };
+  },
   computed: {
     ...mapState({
       open(state) {
         return state[this.namespace][this.name].open;
       },
     }),
+  },
+  created() {
+    if (!this.$store.hasModule([this.namespace, this.name])) {
+      this.$store.registerModule([this.namespace, this.name], menu);
+    }
+  },
+  beforeDestroy() {
+    if (this.$store.hasModule([this.namespace, this.name])) {
+      this.$store.unregisterModule([this.namespace, this.name], menu);
+    }
   },
   methods: {
     openMenu() {

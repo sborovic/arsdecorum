@@ -1,6 +1,6 @@
 <template>
   <SfFooter
-    :column="column"
+    column="4"
     :multiple="multiple"
     :open="open"
     class="sb-footer"
@@ -11,11 +11,17 @@
       :title="column.title"
     >
       <SfList v-if="column.items">
-        <SfListItem v-for="item in column.items" :key="item">
+        <SfListItem
+          v-for="item in column.items"
+          :key="item"
+        >
           <SfMenuItem :label="item" />
         </SfListItem>
       </SfList>
-      <div v-else class="sb-footer__social">
+      <div
+        v-else
+        class="sb-footer__social"
+      >
         <SfImage
           v-for="picture in column.pictures"
           :key="picture"
@@ -61,7 +67,6 @@ export default {
           pictures: ['facebook', 'pinterest', 'twitter', 'youtube'],
         },
       ],
-      column: 4,
       multiple: false,
       open: ['About us', 'Help', 'Social'],
     };

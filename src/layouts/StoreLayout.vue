@@ -1,8 +1,8 @@
 <template>
   <div>
-    <StoreHeader/>
-        <slot>[NO CONTENT]</slot>
-    <StoreFooter/>
+    <StoreHeader />
+    <slot>[NO CONTENT]</slot>
+    <StoreFooter />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="sf-header__icons">
-      <div>
+  <div class="sf-header__icons">
+    <div>
       <SfButton
         v-if="accountIcon"
         class="sf-button--pure sf-header__action "
@@ -10,23 +10,22 @@
           :icon="accountIcon"
           size="1.25rem"
           :class="{
-                    'sf-header__icon--is-active': activeIcon === 'account',
-                  }"
+            'sf-header__icon--is-active': activeIcon === 'account',
+          }"
         />
         <template v-if="isUserAuth">
           {{ customLabel }}
-          <SfChevron/>
+          <SfChevron />
         </template>
       </SfButton>
       <StoreHeaderIconsMenu
         v-if="isUserAuth"
         :namespace="menusNamespace"
         :name="accountMenu"
-        :action-list="['option1', 'option2']"
-        >
-      </StoreHeaderIconsMenu>
-      </div>
-      <div>
+        :action-list="['My profile', 'Logout']"
+      />
+    </div>
+    <div>
       <SfButton
         v-if="wishlistIcon"
         class="sf-button--pure sf-header__action"
@@ -39,18 +38,18 @@
           :badge-label="wishlistItemsQty"
           size="1.25rem"
           :class="{
-                    'sf-header__icon--is-active': activeIcon === 'wishlist',
-                  }"
+            'sf-header__icon--is-active': activeIcon === 'wishlist',
+          }"
         />
-        <SfChevron/>
+        <SfChevron />
       </SfButton>
       <StoreHeaderIconsMenu
         :namespace="menusNamespace"
         :name="wishlistMenu"
-        :actionList="['wish1', 'wish2']"
-        />
-      </div>
-      <div>
+        :action-list="['wisgfghjkjhgfghjkljhgfghjkh1', 'wish2']"
+      />
+    </div>
+    <div>
       <SfButton
         v-if="cartIcon"
         class="sf-button--pure sf-header__action"
@@ -63,18 +62,18 @@
           :badge-label="cartItemsQty"
           size="1.25rem"
           :class="{
-                    'sf-header__icon--is-active': activeIcon === 'cart',
-                  }"
+            'sf-header__icon--is-active': activeIcon === 'cart',
+          }"
         />
-        <SfChevron/>
+        <SfChevron />
       </SfButton>
       <StoreHeaderIconsMenu
         :namespace="menusNamespace"
         :name="cartMenu"
-        :actionList="['cartjhghjkjhghjklkjhghjkjhghj1', 'cart2']"
-        />
-        </div>
+        :action-list="['THIS EM', 'cart2']"
+      />
     </div>
+  </div>
 </template>
 
 <script>
@@ -89,14 +88,6 @@ export default {
     SfIcon,
     SfChevron,
     StoreHeaderIconsMenu,
-  },
-  data() {
-    return {
-      menusNamespace: 'menus',
-      accountMenu: 'accountMenu',
-      wishlistMenu: 'wishlistMenu',
-      cartMenu: 'cartMenu',
-    };
   },
   props: {
     /**
@@ -144,6 +135,14 @@ export default {
       type: [String, Number],
       default: '0',
     },
+  },
+  data() {
+    return {
+      menusNamespace: 'menus',
+      accountMenu: 'accountMenu',
+      wishlistMenu: 'wishlistMenu',
+      cartMenu: 'cartMenu',
+    };
   },
   computed: {
     ...mapGetters('authentication', ['getUser', 'isUserAuth']),
