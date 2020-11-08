@@ -22,7 +22,11 @@
         v-if="isUserAuth"
         :namespace="menusNamespace"
         :name="accountMenu"
-        :action-list="['My profile', 'Logout']"
+        :action-list="[{
+          label: 'Sign out',
+          link: { name: 'Products'},
+          method: () => {this.$store.dispatch('authentication/signOutAction');}
+        }]"
       />
     </div>
     <div>
@@ -46,7 +50,13 @@
       <StoreHeaderIconsMenu
         :namespace="menusNamespace"
         :name="wishlistMenu"
-        :action-list="['wisgfghjkjhgfghjkljhgfghjkh1', 'wish2']"
+        :action-list="[{
+          label: 'STEFAN singnout',
+          link: { name: 'Products'},
+          method: function() {
+            poruka('sd');
+          },
+        }]"
       />
     </div>
     <div>
@@ -70,7 +80,10 @@
       <StoreHeaderIconsMenu
         :namespace="menusNamespace"
         :name="cartMenu"
-        :action-list="['THIS EM', 'cart2']"
+        :action-list="[{
+          label: 'stefanunt',
+          link: { name: 'Products'},
+        }]"
       />
     </div>
   </div>
@@ -157,6 +170,10 @@ export default {
     },
   },
   methods: {
+    poruka(msg) {
+      // eslint-disable-next-line no-alert
+      alert(msg);
+    },
     ...mapMutations({
       showModal: 'modal/showModal',
       openAccountMenu(commit) {

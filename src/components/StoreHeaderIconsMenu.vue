@@ -16,9 +16,9 @@
           >
             <SfButton
               class="sf-button--full-width sf-button--underlined color-primary"
-              @click="closeMenu"
+              @click="closeMenu(action.method)"
             >
-              {{ action }}
+              {{ action.label }}
             </SfButton>
           </SfListItem>
         </SfList>
@@ -80,7 +80,8 @@ export default {
     openMenu() {
       this.$store.commit(`${this.namespace}/${this.name}/openMenu`);
     },
-    closeMenu() {
+    closeMenu(method) {
+      if (method !== undefined) method();
       this.$store.commit(`${this.namespace}/${this.name}/closeMenu`);
     },
   },

@@ -47,6 +47,17 @@ const store = {
           commit('setError', error.message);
         });
     },
+    signOutAction({ commit }) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          commit('setUser', null);
+        })
+        .catch((error) => {
+          commit('setError', error.message);
+        });
+    },
   },
 };
 

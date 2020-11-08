@@ -1,6 +1,6 @@
 <template>
   <SfFooter
-    column="4"
+    :column="4"
     :multiple="multiple"
     :open="open"
     class="sb-footer"
